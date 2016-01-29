@@ -1,0 +1,8 @@
+
+*.gem
+
+tmp/spam_triggers.json
+
+.byebug_history
+
+.env
