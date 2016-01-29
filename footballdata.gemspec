@@ -12,5 +12,5 @@ Gem::Specification.new do |gem|
   gem.files         = Dir.glob("lib/**/*")
   gem.license       = 'MIT'
   gem.add_runtime_dependency "sanitize", "~> 4.0"
-  gem.add_development_dependency "dotenv", "~> 2.1.0"
+  gem.add_development_dependency "dotenv", "~> 2.1"
 end

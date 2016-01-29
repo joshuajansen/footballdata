@@ -1,6 +1,5 @@
 require "json"
 require "open-uri"
-require "byebug"
 
 require './lib/models/fixture'
 require './lib/models/team'
