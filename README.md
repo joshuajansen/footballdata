@@ -1,3 +1,6 @@
+![Codeship](https://codeship.com/projects/380af8b0-a881-0133-6083-4ae619b9c646/status?branch=master)
+
+
 # FootballData
 
 Wrapper for the football-data.org API.
