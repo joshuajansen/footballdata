@@ -1,10 +1,10 @@
 require "json"
 require "open-uri"
 
-require './lib/models/fixture'
-require './lib/models/team'
-require './lib/models/league'
-require './lib/configuration'
+require 'models/fixture'
+require 'models/team'
+require 'models/league'
+require 'configuration'
 
 BASE_URL = "http://api.football-data.org/v1"
 
