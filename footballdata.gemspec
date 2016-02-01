@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = 'footballdata'
-  gem.version       = '0.1'
+  gem.version       = '0.2'
   gem.date          = '2016-01-27'
   gem.authors       = ["Joshua Jansen"]
   gem.email         = ["joshuajansen88@gmail.com"]
