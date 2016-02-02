@@ -1,5 +1,8 @@
 module Footballdata
   class Fixture
+    attr_reader :id, :soccerseason_id, :date, :matchday, :home_team_name, :home_team_id,
+                :away_team_name, :away_team_id, :goals_home_team, :goals_away_team
+
     def initialize(id:, soccerseason_id:, date:, matchday:, home_team_name:, home_team_id:,
                    away_team_name:, away_team_id:, goals_home_team:, goals_away_team:)
       @id = id
