@@ -1,5 +1,5 @@
 require "json"
-require "open-uri"
+require 'net/http'
 
 require 'models/fixture'
 require 'models/team'
@@ -8,31 +8,51 @@ require 'configuration'
 
 BASE_URL = "http://api.football-data.org/v1"
 
-def api_key
-  Footballdata.configuration.api_key
-end
-
 module Footballdata
+  def self.api_key
+    Footballdata.configuration.api_key
+  end
+
+  def self.api_request(path)
+    uri = URI([BASE_URL, path].join)
+    req = Net::HTTP::Get.new(uri)
+    req['X-Auth-Token'] = api_key
+
+    response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.request(req)
+    end
+
+    case response
+    when Net::HTTPSuccess then
+      response
+    when Net::HTTPTooManyRequests then
+      raise RuntimeError, "API limit reached"
+    else
+      response
+    end
+  end
+
   def self.leagues(season: current_season)
-    open("#{BASE_URL}/soccerseasons?season=#{season}", "X-Auth-Token" => api_key) do |response|
-      JSON.parse(response.read).map do |league|
-        League.new(
-          id: league["id"],
-          name: league["caption"]
-        )
-      end
+    response = Footballdata::api_request("/soccerseasons?season=#{season}")
+
+    JSON.parse(response.body).map do |league|
+      League.new(
+        id: league["id"],
+        name: league["caption"],
+        number_of_teams: league["numberOfTeams"]
+      )
     end
   end
 
   def self.team(id)
-    open("#{BASE_URL}/teams/#{id}", "X-Auth-Token" => api_key) do |response|
-      team = JSON.parse(response.read)
-      id = team["_links"]["fixtures"]["href"].split("/")[-2]
-      Team.new(
-        id: id,
-        name: team["name"]
-      )
-    end
+    response = Footballdata::api_request("/teams/#{id}")
+
+    team = JSON.parse(response.body)
+    id = team["_links"]["fixtures"]["href"].split("/")[-2]
+    Team.new(
+      id: id,
+      name: team["name"]
+    )
   end
 
   def self.current_season
