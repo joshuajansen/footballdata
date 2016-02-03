@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |gem|
   gem.name          = 'footballdata'
-  gem.version       = '0.3'
-  gem.date          = '2016-01-27'
+  gem.version       = '0.4'
+  gem.date          = Date.today
   gem.authors       = ["Joshua Jansen"]
   gem.email         = ["joshuajansen88@gmail.com"]
   gem.description   = %q{Wrapper for the football-data.org API}

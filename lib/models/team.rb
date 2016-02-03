@@ -1,10 +1,11 @@
 module Footballdata
   class Team
-    attr_reader :id, :name
+    attr_reader :id, :name, :logo_url
 
-    def initialize(id:, name:)
+    def initialize(id:, name:, logo_url:)
       @id = id
       @name = name
+      @logo_url = logo_url
     end
 
     def fixtures

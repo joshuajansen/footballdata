@@ -14,7 +14,8 @@ module Footballdata
         id = team["_links"]["fixtures"]["href"].split("/")[-2]
         Footballdata::Team.new(
           id: id,
-          name: team["name"]
+          name: team["name"],
+          logo_url: team["crestUrl"],
         )
       end
     end
